@@ -1,0 +1,26 @@
+window.ATLAS_DATA = {
+  questions: [
+    {id:'q1',short:'能力继承',title:'能力能否被继承？',description:'追踪经验被保存为什么，以及这些内容能否在后代、其他任务或不同模型中继续发挥作用。',criterion:'关键证据：迁移评测、组件移植、删除与回滚实验。'},
+    {id:'q2',short:'谱系与搜索',title:'谱系能否帮助搜索？',description:'区分保存历史记录与实际利用祖先、分支、失败信息来选择下一次改进。',criterion:'关键证据：在相同预算下，与线性改进、普通档案搜索进行比较。'},
+    {id:'q3',short:'改进能力',title:'后代是否更善于改进自己？',description:'区分任务表现变好、改进器可修改，以及后续产生有效改进的效率确实提高。',criterion:'关键证据：固定后续搜索预算，比较祖先与后代的改进收益。'}
+  ],
+  branches: {
+    all:{title:'Agent 自我改进',code:'ROOT / 00',summary:'按改进机制组织代表性文献。分类连线表示方法归属，不表示论文或版本之间的真实血缘。',tags:['8 篇种子文献','机制与证据'],papers:['dgm','hyperagents','adas','reflexion','voyager','textgrad','dspy','self-refine']},
+    harness:{title:'Harness 改进',code:'BRANCH / 01',summary:'改进模型之外的工作系统：提示词、工具、记忆、技能与 agent 代码。不同机制可以组合使用。',tags:['运行框架','持久更新','方法可交叉'],papers:['dgm','hyperagents','adas','textgrad','reflexion','voyager']},
+    evolution:{title:'档案搜索与分支演化',code:'BRANCH / 01.2',summary:'参考已有候选或选择父版本，生成、评估并保留新的 agent。真实版本继承属于这一类 harness 改进机制。',tags:['候选档案','父版本选择','版本继承'],papers:['dgm','hyperagents','adas']},
+    iterative:{title:'单版本迭代优化',code:'BRANCH / 01.1',summary:'将评价信号转化为针对提示、代码等变量的修改，沿当前系统逐步优化。',tags:['文字反馈','变量更新'],papers:['textgrad']},
+    memory:{title:'跨任务经验积累',code:'BRANCH / 01.3',summary:'将经历保存为可检索的反思记忆或代码技能，在后续尝试与任务中复用。',tags:['反思记忆','代码技能','经验复用'],papers:['reflexion','voyager']},
+    joint:{title:'模型与 Harness 协同',code:'BRANCH / 02',summary:'通过编译和优化同时考虑语言模型流水线与可学习参数。模型微调是可选路径，具体配置需要分别核查。',tags:['流水线编译','提示示例','可选微调'],papers:['dspy']},
+    foundation:{title:'相关基础方法',code:'CONTEXT / 03',summary:'帮助理解自改进的基础方法。任务内输出修订本身，不足以证明持久的 agent 能力积累。',tags:['任务内修订','边界参照'],papers:['self-refine']}
+  },
+  papers: [
+    {id:'dgm',name:'DGM',title:'Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents',year:2025,branch:'evolution',paper:'https://arxiv.org/abs/2505.22954',source:'https://arxiv.org/html/2505.22954v3',mechanism:'从历史档案中选择父 agent，让其修改自己的代码，经编码任务评测后形成新的演化分支。',targets:['Agent 代码','工具','上下文管理'],evidence:{q1:{status:'mechanism',note:'代码被后代继承，并测试了设计跨模型迁移；单项能力继承的因果作用仍需单独检验。'},q2:{status:'tested',note:'比较档案探索、线性更新与贪心父节点选择；证据覆盖档案及父选择策略。'},q3:{status:'mechanism',note:'改进后的 agent 继续自修改，并有固定初始改进器基线；普遍改进效率仍需进一步验证。'}}},
+    {id:'hyperagents',name:'Hyperagents',title:'Hyperagents',year:2026,branch:'evolution',paper:'https://arxiv.org/abs/2603.19461',source:'https://arxiv.org/html/2603.19461v1',mechanism:'将任务 agent 与负责修改它的元 agent 放入同一个可编辑程序，让产生未来改进的机制也参与演化。',targets:['任务 Agent','元 Agent','改进器可修改'],evidence:{q1:{status:'tested',note:'测试元级改进的跨领域迁移与跨运行复用；并非每个组件都完成了因果消融。'},q2:{status:'tested',note:'比较开放式档案探索基线；谱系深度选择指标的独立价值仍待核查。'},q3:{status:'tested',note:'§5.2 固定迁移后的元 agent，通过 imp@50 测量产生更优 agent 的能力。'}},limitation:'部分跨运行累积实验的终局差异不显著；这些结果不证明普遍或无限自加速。'},
+    {id:'adas',name:'ADAS',title:'Automated Design of Agentic Systems',year:2024,branch:'evolution',paper:'https://arxiv.org/abs/2408.08435',source:'https://arxiv.org/html/2408.08435v2',mechanism:'元 agent 参考不断扩大的候选档案编写新 agent，将评测结果反馈到下一轮设计。',targets:['Agent 代码','提示词','工作流'],evidence:{q1:{status:'mechanism',note:'测试整体设计的跨领域与跨模型迁移；未据此隔离组件继承的因果作用。'},q2:{status:'mechanism',note:'候选档案参与搜索；这与证明显式父子谱系的独立价值仍有区别。'},q3:{status:'outside',note:'Meta Agent Search 的元级搜索流程保持固定。'}}},
+    {id:'reflexion',name:'Reflexion',title:'Reflexion: Language Agents with Verbal Reinforcement Learning',year:2023,branch:'memory',paper:'https://arxiv.org/abs/2303.11366',mechanism:'将任务反馈转化为文字反思，存入情景记忆并用于后续尝试，无需更新模型权重。',targets:['情景记忆','反思文本'],evidence:{q1:{status:'mechanism',note:'测试了反思记忆对后续尝试的帮助；不等于独立后代之间的能力继承。'},q2:{status:'outside',note:'核心方法不采用父子版本谱系搜索。'},q3:{status:'outside',note:'反思与更新流程由固定框架执行。'}}},
+    {id:'voyager',name:'Voyager',title:'Voyager: An Open-Ended Embodied Agent with Large Language Models',year:2023,branch:'memory',paper:'https://arxiv.org/abs/2305.16291',mechanism:'在 Minecraft 中利用环境反馈改进程序，将成功行为保存为可检索和组合的代码技能库。',targets:['代码技能','技能库'],evidence:{q1:{status:'tested',note:'测试技能库迁移至新世界解决新任务；证据范围是技能复用。'},q2:{status:'outside',note:'使用技能检索与组合，不依赖父子版本谱系搜索。'},q3:{status:'outside',note:'技能生成与改进框架保持固定。'}}},
+    {id:'textgrad',name:'TextGrad',title:'TextGrad: Automatic “Differentiation” via Text',year:2024,branch:'iterative',paper:'https://arxiv.org/abs/2406.07496',mechanism:'沿计算图反向传播语言模型生成的文字反馈，逐步优化提示、代码等系统变量。',targets:['提示词','代码','文字反馈'],evidence:{q1:{status:'unknown',note:'展示了变量优化收益；后代能力继承的证据尚待核查。'},q2:{status:'outside',note:'计算图描述反馈传播关系，并非 agent 版本血缘。'},q3:{status:'outside',note:'原始 TextGrad 使用既定优化框架。'}}},
+    {id:'dspy',name:'DSPy',title:'DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines',year:2023,branch:'joint',paper:'https://arxiv.org/abs/2310.03714',mechanism:'以声明式模块表达语言模型流水线，再由编译器围绕目标指标优化示例和其他可学习参数。',targets:['提示示例','模块参数','可选模型微调'],evidence:{q1:{status:'unknown',note:'测试了编译后的流水线效果；模块复用与严格能力继承需要进一步区分。'},q2:{status:'outside',note:'原始论文的核心贡献不是 agent 父子谱系搜索。'},q3:{status:'outside',note:'编译过程不以自主重写优化器为目标。'}}},
+    {id:'self-refine',name:'Self-Refine',title:'Self-Refine: Iterative Refinement with Self-Feedback',year:2023,branch:'foundation',paper:'https://arxiv.org/abs/2303.17651',mechanism:'同一语言模型交替生成反馈和修订结果，逐步改善当前任务输出。',targets:['任务输出','自反馈'],evidence:{q1:{status:'outside',note:'研究任务内输出修订，不以持久的后代能力为研究对象。'},q2:{status:'outside',note:'核心流程是线性修订，不采用 agent 版本谱系。'},q3:{status:'outside',note:'反馈与修订程序保持固定。'}}}
+  ]
+};
