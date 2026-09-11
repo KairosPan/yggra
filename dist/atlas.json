@@ -1,13 +1,13 @@
 {
-  "schema_version": "1.0.0",
-  "dataset_version": "0.3.0",
+  "schema_version": "1.1.0",
+  "dataset_version": "0.4.0",
   "language": "en",
   "updated_at": "2026-09-11",
   "title": "Yggra",
-  "description": "A seed literature taxonomy of agent improvement mechanisms and research evidence.",
-  "coverage": "Eight representative papers, not a comprehensive review.",
+  "description": "A literature taxonomy of agent improvement mechanisms and multimodal capability pathways.",
+  "coverage": "Fifteen representative papers and six editorial capability pathways; not a comprehensive review.",
   "annotation_kind": "Editorial summaries of cited papers; not independent replications.",
-  "relationship_semantics": "Branch parent_id expresses taxonomy. Paper branch_ids express classification. Neither represents actual paper ancestry or agent-version lineage.",
+  "relationship_semantics": "Branch parent_id expresses taxonomy; paper branch_ids express classification. Pathway stages are editorial capability targets, not chronology, prerequisites, paper ancestry, or agent-version lineage. Capability gains alone do not establish persistent self-improvement.",
   "year_basis": "First arXiv submission",
   "question_filter": {
     "included_statuses": [
@@ -49,12 +49,12 @@
     "all": {
       "id": "all",
       "parent_id": null,
-      "title": "Agent improvement",
+      "title": "Agent evolution research",
       "code": "ROOT / 00",
-      "summary": "Representative papers organized by improvement mechanism. Taxonomy links are classifications, not claims about actual ancestry.",
+      "summary": "Two organizing lenses: how agents improve and which capabilities they acquire. Taxonomy links are classifications; capability pathways are research targets.",
       "tags": [
-        "8 seed papers",
-        "Mechanisms & evidence"
+        "15 seed papers",
+        "6 capability pathways"
       ],
       "papers": [
         "dgm",
@@ -64,7 +64,14 @@
         "voyager",
         "textgrad",
         "dspy",
-        "self-refine"
+        "self-refine",
+        "vit",
+        "clip",
+        "vggt",
+        "dynamic-scene-graphs",
+        "where2act",
+        "sayplan",
+        "winoground"
       ]
     },
     "harness": {
@@ -162,6 +169,381 @@
       "papers": [
         "self-refine"
       ]
+    },
+    "capabilities": {
+      "id": "capabilities",
+      "parent_id": "all",
+      "title": "Capability pathways",
+      "code": "LENS / 04",
+      "summary": "Editorial routes through capabilities that generalist agents may acquire. Stages describe research targets, not historical ancestry or demonstrated self-improvement.",
+      "tags": [
+        "6 routes",
+        "Course-informed",
+        "Capability targets"
+      ],
+      "papers": [
+        "vit",
+        "clip",
+        "vggt",
+        "dynamic-scene-graphs",
+        "where2act",
+        "sayplan",
+        "winoground"
+      ]
+    },
+    "grounded-perception": {
+      "id": "grounded-perception",
+      "parent_id": "capabilities",
+      "title": "Grounded perception",
+      "code": "PATH / 04.1",
+      "summary": "Connect observations and instructions to objects, locations, and possible interactions.",
+      "tags": [
+        "Capability pathway",
+        "4 stages"
+      ],
+      "papers": [
+        "vit",
+        "vggt",
+        "dynamic-scene-graphs",
+        "where2act"
+      ],
+      "pathway": {
+        "course_source_id": "cis7000-fall26",
+        "course_lectures": [
+          2,
+          3
+        ],
+        "stages": [
+          {
+            "id": "grounded-perception-1",
+            "title": "Recognize entities"
+          },
+          {
+            "id": "grounded-perception-2",
+            "title": "Recover spatial geometry"
+          },
+          {
+            "id": "grounded-perception-3",
+            "title": "Represent scene relations"
+          },
+          {
+            "id": "grounded-perception-4",
+            "title": "Identify action affordances"
+          }
+        ],
+        "stage_order_semantics": "Editorial capability targets. Order is not a historical lineage, a required prerequisite sequence, or a claim of universal progress.",
+        "suggested_evaluation": "Measure referent localization and downstream action success on unseen objects and viewpoints; compare with a 2D-only baseline.",
+        "improvement_hypothesis": "Store reusable object and affordance knowledge, then test whether that memory transfers to new scenes.",
+        "related_method_ids": [
+          "memory",
+          "harness"
+        ],
+        "reading_status": "Direct readings are listed for lectures 2–3.",
+        "readings": [
+          {
+            "paper_id": "vit",
+            "role": "direct"
+          },
+          {
+            "paper_id": "vggt",
+            "role": "direct"
+          },
+          {
+            "paper_id": "dynamic-scene-graphs",
+            "role": "direct"
+          },
+          {
+            "paper_id": "where2act",
+            "role": "direct"
+          }
+        ]
+      }
+    },
+    "multimodal-reasoning": {
+      "id": "multimodal-reasoning",
+      "parent_id": "capabilities",
+      "title": "Multimodal reasoning",
+      "code": "PATH / 04.2",
+      "summary": "Combine language and sensory evidence when neither alone determines the answer.",
+      "tags": [
+        "Capability pathway",
+        "4 stages"
+      ],
+      "papers": [
+        "clip",
+        "winoground"
+      ],
+      "pathway": {
+        "course_source_id": "cis7000-fall26",
+        "course_lectures": [
+          4,
+          5,
+          12,
+          13,
+          14,
+          15
+        ],
+        "stages": [
+          {
+            "id": "multimodal-reasoning-1",
+            "title": "Encode modalities"
+          },
+          {
+            "id": "multimodal-reasoning-2",
+            "title": "Align meanings"
+          },
+          {
+            "id": "multimodal-reasoning-3",
+            "title": "Fuse evidence"
+          },
+          {
+            "id": "multimodal-reasoning-4",
+            "title": "Resolve compositional instructions"
+          }
+        ],
+        "stage_order_semantics": "Editorial capability targets. Order is not a historical lineage, a required prerequisite sequence, or a claim of universal progress.",
+        "suggested_evaluation": "Test held-out compositions and conflicting inputs. Remove or shuffle each modality to establish whether performance depends on grounding.",
+        "improvement_hypothesis": "Optimize fusion prompts and evidence-routing code; compare variants under the same model and inference budget.",
+        "related_method_ids": [
+          "iterative",
+          "joint"
+        ],
+        "reading_status": "CLIP and Winoground are listed for lecture 5. Readings for lectures 12–15 are TBD.",
+        "readings": [
+          {
+            "paper_id": "clip",
+            "role": "direct"
+          },
+          {
+            "paper_id": "winoground",
+            "role": "direct"
+          }
+        ]
+      }
+    },
+    "generative-communication": {
+      "id": "generative-communication",
+      "parent_id": "capabilities",
+      "title": "Generative communication",
+      "code": "PATH / 04.3",
+      "summary": "Produce and iteratively edit visual or spoken outputs under user control.",
+      "tags": [
+        "Capability pathway",
+        "4 stages"
+      ],
+      "papers": [],
+      "pathway": {
+        "course_source_id": "cis7000-fall26",
+        "course_lectures": [
+          6,
+          7,
+          8,
+          9
+        ],
+        "stages": [
+          {
+            "id": "generative-communication-1",
+            "title": "Interpret intent"
+          },
+          {
+            "id": "generative-communication-2",
+            "title": "Generate visual or audio output"
+          },
+          {
+            "id": "generative-communication-3",
+            "title": "Satisfy structural constraints"
+          },
+          {
+            "id": "generative-communication-4",
+            "title": "Revise through interaction"
+          }
+        ],
+        "stage_order_semantics": "Editorial capability targets. Order is not a historical lineage, a required prerequisite sequence, or a claim of universal progress.",
+        "suggested_evaluation": "Under a fixed interaction budget, measure constraint satisfaction and requested-edit success, including preservation of unchanged content.",
+        "improvement_hypothesis": "Retain useful feedback as edit strategies and test reuse across tasks; distinguish one output revision from a persistent agent update.",
+        "related_method_ids": [
+          "memory",
+          "iterative"
+        ],
+        "reading_status": "Direct readings for lectures 6–9 are TBD; no generation paper has been added from this syllabus.",
+        "readings": []
+      }
+    },
+    "world-models": {
+      "id": "world-models",
+      "parent_id": "capabilities",
+      "title": "Temporal & causal world models",
+      "code": "PATH / 04.4",
+      "summary": "Reason about how a world changes and which actions could produce a desired outcome.",
+      "tags": [
+        "Capability pathway",
+        "4 stages"
+      ],
+      "papers": [
+        "dynamic-scene-graphs",
+        "sayplan"
+      ],
+      "pathway": {
+        "course_source_id": "cis7000-fall26",
+        "course_lectures": [
+          10,
+          11,
+          24,
+          25
+        ],
+        "stages": [
+          {
+            "id": "world-models-1",
+            "title": "Track events"
+          },
+          {
+            "id": "world-models-2",
+            "title": "Predict dynamics"
+          },
+          {
+            "id": "world-models-3",
+            "title": "Compare action-conditioned futures"
+          },
+          {
+            "id": "world-models-4",
+            "title": "Plan and test interventions"
+          }
+        ],
+        "stage_order_semantics": "Editorial capability targets. Order is not a historical lineage, a required prerequisite sequence, or a claim of universal progress.",
+        "suggested_evaluation": "Compare equal-budget planning with and without a predictive model on changed dynamics. Test causal claims on held-out interventions separately from prediction accuracy.",
+        "improvement_hypothesis": "Use failed rollouts to propose planner changes, retain alternative variants, and test whether archive-guided selection improves later planning.",
+        "related_method_ids": [
+          "evolution",
+          "memory"
+        ],
+        "reading_status": "Scene graphs and SayPlan are earlier-course bridges from lecture 3, not demonstrations of learned causal world models. Direct readings for lectures 10–11 and 24–25 are TBD.",
+        "readings": [
+          {
+            "paper_id": "dynamic-scene-graphs",
+            "role": "bridge"
+          },
+          {
+            "paper_id": "sayplan",
+            "role": "bridge"
+          }
+        ]
+      }
+    },
+    "embodied-action": {
+      "id": "embodied-action",
+      "parent_id": "capabilities",
+      "title": "Embodied action",
+      "code": "PATH / 04.5",
+      "summary": "Turn multimodal understanding into physical actions that adapt to contact and disturbance.",
+      "tags": [
+        "Capability pathway",
+        "4 stages"
+      ],
+      "papers": [
+        "where2act",
+        "sayplan"
+      ],
+      "pathway": {
+        "course_source_id": "cis7000-fall26",
+        "course_lectures": [
+          3,
+          18,
+          19,
+          20,
+          24
+        ],
+        "stages": [
+          {
+            "id": "embodied-action-1",
+            "title": "Ground affordances"
+          },
+          {
+            "id": "embodied-action-2",
+            "title": "Represent executable actions"
+          },
+          {
+            "id": "embodied-action-3",
+            "title": "Condition policies on instructions"
+          },
+          {
+            "id": "embodied-action-4",
+            "title": "Correct through sensory feedback"
+          }
+        ],
+        "stage_order_semantics": "Editorial capability targets. Order is not a historical lineage, a required prerequisite sequence, or a claim of universal progress.",
+        "suggested_evaluation": "Measure success on unseen objects and perturbations; ablate visual, language, and tactile feedback separately.",
+        "improvement_hypothesis": "Transfer a learned skill library to new objects or embodiments; test retained task success and adaptation cost.",
+        "related_method_ids": [
+          "memory",
+          "joint"
+        ],
+        "reading_status": "Where2Act and optional SayPlan are listed for lecture 3. They bridge to later action topics; direct readings for lectures 18–20 and 24 are TBD.",
+        "readings": [
+          {
+            "paper_id": "where2act",
+            "role": "bridge"
+          },
+          {
+            "paper_id": "sayplan",
+            "role": "bridge"
+          }
+        ]
+      }
+    },
+    "structured-reasoning": {
+      "id": "structured-reasoning",
+      "parent_id": "capabilities",
+      "title": "Structured & scientific reasoning",
+      "code": "PATH / 04.6",
+      "summary": "Work with tables, charts, symbolic relations, and scientific measurements while preserving their structure.",
+      "tags": [
+        "Capability pathway",
+        "4 stages"
+      ],
+      "papers": [
+        "winoground"
+      ],
+      "pathway": {
+        "course_source_id": "cis7000-fall26",
+        "course_lectures": [
+          21,
+          22,
+          23,
+          25
+        ],
+        "stages": [
+          {
+            "id": "structured-reasoning-1",
+            "title": "Extract structured observations"
+          },
+          {
+            "id": "structured-reasoning-2",
+            "title": "Compose relations"
+          },
+          {
+            "id": "structured-reasoning-3",
+            "title": "Execute explicit reasoning"
+          },
+          {
+            "id": "structured-reasoning-4",
+            "title": "Test evidence-based hypotheses"
+          }
+        ],
+        "stage_order_semantics": "Editorial capability targets. Order is not a historical lineage, a required prerequisite sequence, or a claim of universal progress.",
+        "suggested_evaluation": "Hold out relation compositions or acquisition settings. Measure answer accuracy, structural consistency, and intervention predictions separately.",
+        "improvement_hypothesis": "Evolve parsers, verifiers, and analysis workflows; test whether improved components transfer to a new domain without changing the evaluation budget.",
+        "related_method_ids": [
+          "harness",
+          "evolution"
+        ],
+        "reading_status": "Winoground is an earlier-course bridge for compositional evaluation, not a scientific-domain method. Direct readings for lectures 21–23 and 25 are TBD.",
+        "readings": [
+          {
+            "paper_id": "winoground",
+            "role": "bridge"
+          }
+        ]
+      }
     }
   },
   "papers": [
@@ -461,6 +843,324 @@
           "source_locator": null
         }
       }
+    },
+    {
+      "id": "vit",
+      "name": "ViT",
+      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+      "year": 2020,
+      "branch": "grounded-perception",
+      "branch_ids": [
+        "grounded-perception"
+      ],
+      "paper": "https://arxiv.org/abs/2010.11929",
+      "mechanism": "Applies a Transformer directly to sequences of image patches, then transfers a pretrained visual representation to image recognition tasks.",
+      "targets": [
+        "Visual representation"
+      ],
+      "evidence": {
+        "q1": {
+          "status": "outside",
+          "note": "This entry supplies a capability foundation or evaluation. Agent-descendant capability inheritance is outside its core scope.",
+          "source_url": "https://arxiv.org/abs/2010.11929",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q2": {
+          "status": "outside",
+          "note": "The method does not test search over parent–child agent-version lineage.",
+          "source_url": "https://arxiv.org/abs/2010.11929",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q3": {
+          "status": "outside",
+          "note": "The work does not test whether descendants become better at generating future agent improvements.",
+          "source_url": "https://arxiv.org/abs/2010.11929",
+          "source_locator": "Abstract; atlas scope annotation"
+        }
+      },
+      "limitation": "Visual backbone training and transfer do not establish agent version inheritance or autonomous improvement of the training process.",
+      "course_reading": {
+        "course_source_id": "cis7000-fall26",
+        "lecture": 2,
+        "assignment": "assigned"
+      }
+    },
+    {
+      "id": "clip",
+      "name": "CLIP",
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "year": 2021,
+      "branch": "multimodal-reasoning",
+      "branch_ids": [
+        "multimodal-reasoning"
+      ],
+      "paper": "https://arxiv.org/abs/2103.00020",
+      "mechanism": "Learns image and text representations by matching image-caption pairs, enabling natural-language descriptions to specify visual concepts for zero-shot transfer.",
+      "targets": [
+        "Cross-modal alignment"
+      ],
+      "evidence": {
+        "q1": {
+          "status": "outside",
+          "note": "This entry supplies a capability foundation or evaluation. Agent-descendant capability inheritance is outside its core scope.",
+          "source_url": "https://arxiv.org/abs/2103.00020",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q2": {
+          "status": "outside",
+          "note": "The method does not test search over parent–child agent-version lineage.",
+          "source_url": "https://arxiv.org/abs/2103.00020",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q3": {
+          "status": "outside",
+          "note": "The work does not test whether descendants become better at generating future agent improvements.",
+          "source_url": "https://arxiv.org/abs/2103.00020",
+          "source_locator": "Abstract; atlas scope annotation"
+        }
+      },
+      "limitation": "Pretraining and zero-shot transfer supply a perception capability; they do not demonstrate agents inheriting learned improvements from parent versions.",
+      "course_reading": {
+        "course_source_id": "cis7000-fall26",
+        "lecture": 5,
+        "assignment": "assigned"
+      }
+    },
+    {
+      "id": "vggt",
+      "name": "VGGT",
+      "title": "VGGT: Visual Geometry Grounded Transformer",
+      "year": 2025,
+      "branch": "grounded-perception",
+      "branch_ids": [
+        "grounded-perception"
+      ],
+      "paper": "https://arxiv.org/abs/2503.11651",
+      "mechanism": "A feed-forward network jointly infers camera parameters, depth maps, point maps, and 3D point tracks from one or many scene views.",
+      "targets": [
+        "Spatial world representation"
+      ],
+      "evidence": {
+        "q1": {
+          "status": "outside",
+          "note": "This entry supplies a capability foundation or evaluation. Agent-descendant capability inheritance is outside its core scope.",
+          "source_url": "https://arxiv.org/abs/2503.11651",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q2": {
+          "status": "outside",
+          "note": "The method does not test search over parent–child agent-version lineage.",
+          "source_url": "https://arxiv.org/abs/2503.11651",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q3": {
+          "status": "outside",
+          "note": "The work does not test whether descendants become better at generating future agent improvements.",
+          "source_url": "https://arxiv.org/abs/2503.11651",
+          "source_locator": "Abstract; atlas scope annotation"
+        }
+      },
+      "limitation": "Provides geometric perception and transferable visual features; it is not a mechanism for evolving an agent or its improver.",
+      "course_reading": {
+        "course_source_id": "cis7000-fall26",
+        "lecture": 3,
+        "assignment": "assigned"
+      }
+    },
+    {
+      "id": "dynamic-scene-graphs",
+      "name": "3D Dynamic Scene Graphs",
+      "title": "3D Dynamic Scene Graphs: Actionable Spatial Perception with Places, Objects, and Humans",
+      "year": 2020,
+      "branch": "grounded-perception",
+      "branch_ids": [
+        "grounded-perception",
+        "world-models"
+      ],
+      "paper": "https://arxiv.org/abs/2002.06289",
+      "mechanism": "Builds hierarchical scene graphs from visual-inertial observations, representing places, objects, moving agents, and their spatial and temporal relations.",
+      "targets": [
+        "Spatial world representation"
+      ],
+      "evidence": {
+        "q1": {
+          "status": "outside",
+          "note": "This entry supplies a capability foundation or evaluation. Agent-descendant capability inheritance is outside its core scope.",
+          "source_url": "https://arxiv.org/abs/2002.06289",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q2": {
+          "status": "outside",
+          "note": "The method does not test search over parent–child agent-version lineage.",
+          "source_url": "https://arxiv.org/abs/2002.06289",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q3": {
+          "status": "outside",
+          "note": "The work does not test whether descendants become better at generating future agent improvements.",
+          "source_url": "https://arxiv.org/abs/2002.06289",
+          "source_locator": "Abstract; atlas scope annotation"
+        }
+      },
+      "limitation": "An evolving map records changes in the environment; this alone does not show persistent improvement of an agent's capabilities or inheritance between agent versions.",
+      "course_reading": {
+        "course_source_id": "cis7000-fall26",
+        "lecture": 3,
+        "assignment": "assigned"
+      }
+    },
+    {
+      "id": "where2act",
+      "name": "Where2Act",
+      "title": "Where2Act: From Pixels to Actions for Articulated 3D Objects",
+      "year": 2021,
+      "branch": "grounded-perception",
+      "branch_ids": [
+        "grounded-perception",
+        "embodied-action"
+      ],
+      "paper": "https://arxiv.org/abs/2101.02692",
+      "mechanism": "Learns from simulated interactions to predict localized pushing and pulling affordances from image and depth observations of articulated objects.",
+      "targets": [
+        "Embodied interaction"
+      ],
+      "evidence": {
+        "q1": {
+          "status": "outside",
+          "note": "This entry supplies a capability foundation or evaluation. Agent-descendant capability inheritance is outside its core scope.",
+          "source_url": "https://arxiv.org/abs/2101.02692",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q2": {
+          "status": "outside",
+          "note": "The method does not test search over parent–child agent-version lineage.",
+          "source_url": "https://arxiv.org/abs/2101.02692",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q3": {
+          "status": "outside",
+          "note": "The work does not test whether descendants become better at generating future agent improvements.",
+          "source_url": "https://arxiv.org/abs/2101.02692",
+          "source_locator": "Abstract; atlas scope annotation"
+        }
+      },
+      "limitation": "Interaction data trains a reusable affordance predictor, but the work does not establish inheritance across agent generations or an improver that improves itself.",
+      "course_reading": {
+        "course_source_id": "cis7000-fall26",
+        "lecture": 3,
+        "assignment": "assigned"
+      }
+    },
+    {
+      "id": "sayplan",
+      "name": "SayPlan",
+      "title": "SayPlan: Grounding Large Language Models using 3D Scene Graphs for Scalable Robot Task Planning",
+      "year": 2023,
+      "branch": "world-models",
+      "branch_ids": [
+        "world-models",
+        "embodied-action"
+      ],
+      "paper": "https://arxiv.org/abs/2307.06135",
+      "mechanism": "Combines LLM search over hierarchical 3D scene graphs, classical path planning, and simulator feedback to revise infeasible robot task plans.",
+      "targets": [
+        "Grounded planning"
+      ],
+      "evidence": {
+        "q1": {
+          "status": "outside",
+          "note": "This entry supplies a capability foundation or evaluation. Agent-descendant capability inheritance is outside its core scope.",
+          "source_url": "https://arxiv.org/abs/2307.06135",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q2": {
+          "status": "outside",
+          "note": "The method does not test search over parent–child agent-version lineage.",
+          "source_url": "https://arxiv.org/abs/2307.06135",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q3": {
+          "status": "outside",
+          "note": "The work does not test whether descendants become better at generating future agent improvements.",
+          "source_url": "https://arxiv.org/abs/2307.06135",
+          "source_locator": "Abstract; atlas scope annotation"
+        }
+      },
+      "limitation": "Iterative replanning repairs a task plan; it does not by itself demonstrate that a persistent planner or its descendants become better improvers.",
+      "course_reading": {
+        "course_source_id": "cis7000-fall26",
+        "lecture": 3,
+        "assignment": "optional"
+      }
+    },
+    {
+      "id": "winoground",
+      "name": "Winoground",
+      "title": "Winoground: Probing Vision and Language Models for Visio-Linguistic Compositionality",
+      "year": 2022,
+      "branch": "multimodal-reasoning",
+      "branch_ids": [
+        "multimodal-reasoning",
+        "structured-reasoning"
+      ],
+      "paper": "https://arxiv.org/abs/2204.03162",
+      "mechanism": "Evaluates compositional understanding by matching two images to captions with the same words arranged in different orders.",
+      "targets": [
+        "Compositional evaluation"
+      ],
+      "evidence": {
+        "q1": {
+          "status": "outside",
+          "note": "This entry supplies a capability foundation or evaluation. Agent-descendant capability inheritance is outside its core scope.",
+          "source_url": "https://arxiv.org/abs/2204.03162",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q2": {
+          "status": "outside",
+          "note": "The method does not test search over parent–child agent-version lineage.",
+          "source_url": "https://arxiv.org/abs/2204.03162",
+          "source_locator": "Abstract; atlas scope annotation"
+        },
+        "q3": {
+          "status": "outside",
+          "note": "The work does not test whether descendants become better at generating future agent improvements.",
+          "source_url": "https://arxiv.org/abs/2204.03162",
+          "source_locator": "Abstract; atlas scope annotation"
+        }
+      },
+      "limitation": "A diagnostic benchmark can test a proposed capability gain; the benchmark itself is not a learning, inheritance, or recursive improvement method.",
+      "course_reading": {
+        "course_source_id": "cis7000-fall26",
+        "lecture": 5,
+        "assignment": "assigned"
+      }
+    }
+  ],
+  "course_sources": [
+    {
+      "id": "cis7000-fall26",
+      "title": "CIS 7000 · Multi-Modal AI · Fall 2026",
+      "url": "https://cis7000-fall26.thelabone.org/",
+      "accessed_at": "2026-09-11",
+      "reading_status": "Readings are listed for lectures 2–5. Readings for lectures 6–26 are TBD in this snapshot.",
+      "use": "Course topics motivate editorial capability routes; primary papers support individual mechanism summaries."
+    }
+  ],
+  "cross_cutting_facets": [
+    {
+      "title": "Data, training & evaluation",
+      "course_lectures": [
+        16,
+        17
+      ],
+      "application": "Hold data access, training resources, and evaluation budgets constant when comparing agent variants."
+    },
+    {
+      "title": "Human interaction, privacy, safety & alignment",
+      "course_lectures": [
+        26
+      ],
+      "application": "Assess permission adherence, privacy, controllability, and user correction across all capability routes."
     }
   ]
 }

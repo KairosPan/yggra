@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agent-evolution-atlas-pan.pan5998022.chatgpt.site/atlas.schema.json",
-  "title": "Yggra dataset, schema 1.0.0",
+  "title": "Yggra dataset, schema 1.1.0",
   "type": "object",
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "1.0.0"
+      "const": "1.1.0"
     },
     "dataset_version": {
       "type": "string"
@@ -35,6 +35,69 @@
     },
     "year_basis": {
       "type": "string"
+    },
+    "course_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "accessed_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "reading_status": {
+            "type": "string"
+          },
+          "use": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "url",
+          "accessed_at",
+          "reading_status",
+          "use"
+        ]
+      }
+    },
+    "cross_cutting_facets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "course_lectures": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "application": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "course_lectures",
+          "application"
+        ]
+      }
     },
     "question_filter": {
       "type": "object",
@@ -154,6 +217,92 @@
             "items": {
               "type": "string"
             }
+          },
+          "pathway": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "course_source_id": {
+                "type": "string"
+              },
+              "course_lectures": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "stages": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "title"
+                  ]
+                }
+              },
+              "stage_order_semantics": {
+                "type": "string"
+              },
+              "suggested_evaluation": {
+                "type": "string"
+              },
+              "improvement_hypothesis": {
+                "type": "string"
+              },
+              "related_method_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "reading_status": {
+                "type": "string"
+              },
+              "readings": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "paper_id": {
+                      "type": "string"
+                    },
+                    "role": {
+                      "enum": [
+                        "direct",
+                        "bridge"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "paper_id",
+                    "role"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "course_source_id",
+              "course_lectures",
+              "stages",
+              "stage_order_semantics",
+              "suggested_evaluation",
+              "improvement_hypothesis",
+              "related_method_ids",
+              "reading_status",
+              "readings"
+            ]
           }
         },
         "required": [
@@ -324,6 +473,29 @@
           },
           "limitation": {
             "type": "string"
+          },
+          "course_reading": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "course_source_id": {
+                "type": "string"
+              },
+              "lecture": {
+                "type": "integer"
+              },
+              "assignment": {
+                "enum": [
+                  "assigned",
+                  "optional"
+                ]
+              }
+            },
+            "required": [
+              "course_source_id",
+              "lecture",
+              "assignment"
+            ]
           }
         },
         "required": [
@@ -352,6 +524,8 @@
     "annotation_kind",
     "relationship_semantics",
     "year_basis",
+    "course_sources",
+    "cross_cutting_facets",
     "question_filter",
     "status_definitions",
     "questions",

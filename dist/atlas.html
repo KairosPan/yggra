@@ -23,16 +23,17 @@
     <div class="collection-label">Research workspace <span>01</span></div>
     <nav id="main-nav">
       <a class="nav-item active" data-view="tree" id="view-tree" data-action="set-view" href="?view=tree"><span class="nav-icon" data-icon="tree"></span><span>Literature taxonomy</span><span class="nav-end">↗</span></a>
-      <a class="nav-item" data-view="papers" id="view-papers" data-action="set-view" href="?view=papers"><span class="nav-icon" data-icon="papers"></span><span>Paper index</span><span class="nav-count">8</span></a>
+      <a class="nav-item" data-view="papers" id="view-papers" data-action="set-view" href="?view=papers"><span class="nav-icon" data-icon="papers"></span><span>Paper index</span><span class="nav-count" id="nav-paper-count">15</span></a>
       <a class="nav-item" data-view="questions" id="view-questions" data-action="set-view" href="?view=questions"><span class="nav-icon" data-icon="question"></span><span>Research questions</span><span class="nav-count">3</span></a>
     </nav>
     <div class="sidebar-divider"></div>
     <div class="collection-label">RESEARCH SCOPE</div>
+    <a class="scope-link" data-select="capabilities" id="scope-capabilities" data-action="select-branch" href="?view=tree&amp;branch=capabilities"><span class="scope-mark blue"></span>Capability pathways<span>6</span></a>
     <a class="scope-link" data-select="harness" id="scope-harness" data-action="select-branch" href="?view=tree&amp;branch=harness"><span class="scope-mark purple"></span>Harness improvement<span>6</span></a>
     <a class="scope-link" data-select="joint" id="scope-joint" data-action="select-branch" href="?view=tree&amp;branch=joint"><span class="scope-mark blue"></span>Model–harness optimization<span>1</span></a>
     <a class="scope-link" data-select="foundation" id="scope-foundation" data-action="select-branch" href="?view=tree&amp;branch=foundation"><span class="scope-mark gray"></span>Related foundations<span>1</span></a>
-    <div class="sidebar-data-links"><a href="./catalog.html">Readable catalog <span>↗</span></a><a href="./atlas.json" download="agent-atlas.json">Download JSON <span>↓</span></a><a href="./agent-guide.html">For agents <span>↗</span></a></div><div class="sidebar-note"><span class="note-mark">↳</span><p>Follow the methods.<br>Examine the evidence.</p></div>
-    <div class="sidebar-bottom"><span class="version-mark">α</span><div>Seed collection<small>2023–2026 · Curated seed set</small></div><span class="version-number">0.2</span></div>
+    <div class="sidebar-data-links"><a href="./pathways.html">Evolution pathways <span>↗</span></a><a href="./catalog.html">Readable catalog <span>↗</span></a><a href="./atlas.json" download="agent-atlas.json">Download JSON <span>↓</span></a><a href="./agent-guide.html">For agents <span>↗</span></a></div><div class="sidebar-note"><span class="note-mark">↳</span><p>Follow the methods.<br>Examine the evidence.</p></div>
+    <div class="sidebar-bottom"><span class="version-mark">α</span><div>Seed collection<small>Curated research collection</small></div><span class="version-number">0.4</span></div>
   </aside>
 
   <div class="app-shell">
@@ -44,20 +45,21 @@
     <main id="workspace" tabindex="-1">
       <noscript><p class="noscript-notice">JavaScript is disabled. <a href="./catalog.html">Read the complete catalog</a> or <a href="./atlas.json">download the JSON dataset</a>.</p></noscript>
       <section class="page-heading">
-        <div><div class="eyebrow">A MAP OF SELF-IMPROVING AGENTS</div><h1 id="page-title">Agent Evolution Atlas<span class="title-period">.</span></h1><p id="page-description">Explore how agents improve, what they inherit, and what the evidence supports.</p></div>
-        <div class="collection-stats"><div><strong>08</strong><span>seed papers</span></div><span class="stats-divider"></span><div><strong>03</strong><span>Research questions</span></div></div>
+        <div><div class="eyebrow">METHODS, CAPABILITIES &amp; EVIDENCE</div><h1 id="page-title">Agent Evolution Atlas<span class="title-period">.</span></h1><p id="page-description">Explore how agents improve, what they inherit, and what the evidence supports.</p></div>
+        <div class="collection-stats"><div><strong id="seed-paper-count">15</strong><span>seed papers</span></div><span class="stats-divider"></span><div><strong>03</strong><span>Research questions</span></div></div>
       </section>
       <div class="question-bar"><span class="bar-label">Research lens</span><div class="question-controls" role="group" aria-label="Research lens"><button class="question-chip active" id="lens-all" data-action="set-question" aria-label="Show all mechanisms" data-question="all" aria-pressed="true">All mechanisms</button><button class="question-chip" id="lens-q1" data-action="set-question" aria-label="Filter by capability inheritance" data-question="q1" aria-pressed="false"><span>Q1</span>Inheritance</button><button class="question-chip" id="lens-q2" data-action="set-question" aria-label="Filter by lineage and search" data-question="q2" aria-pressed="false"><span>Q2</span>Lineage & search</button><button class="question-chip" id="lens-q3" data-action="set-question" aria-label="Filter by improvement ability" data-question="q3" aria-pressed="false"><span>Q3</span>Better improvers</button></div><span class="scope-caption">Taxonomy, not ancestry</span></div>
       <p id="filter-description" class="filter-description" aria-live="polite">Showing all mechanisms. Evidence labels refer only to the stated experimental scope.</p>
       <div class="workbench">
         <section class="main-surface" aria-label="Literature explorer">
           <div id="tree-view" class="view-panel">
+            <section id="capability-tree" class="capability-tree" aria-label="Capability pathways"></section>
             <div class="canvas-heading"><div><span class="surface-mark" data-icon="tree"></span><strong>Method taxonomy</strong><span class="small-badge">Seed framework</span></div><button class="text-button" id="toggle-branches" data-action="toggle-branches" aria-controls="method-nodes" aria-expanded="true">Collapse harness <span>−</span></button></div>
             <div class="canvas-viewport" id="canvas-viewport" tabindex="0" aria-label="Taxonomy diagram. Scroll horizontally to explore all branches.">
               <div class="tree-stage" id="tree-stage">
                 <svg class="tree-connections" viewBox="0 0 790 710" aria-hidden="true"><path data-connection="harness" d="M196 337 H214 Q232 337 232 319 V220 Q232 202 249 202 H262"/><path data-connection="joint" d="M196 337 H214 Q232 337 232 355 V404 Q232 422 250 422 H262"/><path data-connection="foundation" d="M196 337 H214 Q232 337 232 355 V542 Q232 560 250 560 H262"/><g id="harness-connections"><path data-connection="iterative" d="M444 202 H458 Q473 202 473 187 V143 Q473 126 490 126 H503"/><path data-connection="evolution" class="selected-path" d="M444 202 H458 Q473 202 473 217 V305 Q473 322 490 322 H503"/><path data-connection="memory" d="M444 202 H458 Q473 202 473 217 V495 Q473 512 490 512 H503"/></g></svg>
                 <div class="tree-axis axis-root">RESEARCH OBJECT</div><div class="tree-axis axis-object">IMPROVEMENT LAYER</div><div class="tree-axis axis-method" id="method-axis">METHOD FAMILY</div>
-                <a class="tree-node root-node" data-node="all" id="branch-all" data-action="select-branch" href="?view=tree&amp;branch=all"><span class="node-kicker">ROOT / 00</span><strong>Agent improvement</strong><span class="node-description">Mechanisms and evidence</span><span class="root-foot">8 seed papers <span>↗</span></span></a>
+                <a class="tree-node root-node" data-node="all" id="branch-all" data-action="select-branch" href="?view=tree&amp;branch=all"><span class="node-kicker">ROOT / 00</span><strong>Agent evolution research</strong><span class="node-description">Mechanisms and evidence</span><span class="root-foot"><span id="root-paper-count">15 seed papers</span><span>↗</span></span></a>
                 <a class="tree-node object-node harness-node" data-node="harness" id="branch-harness" data-action="select-branch" href="?view=tree&amp;branch=harness"><span class="node-kicker">01 <span class="node-number">6</span></span><strong>Harness improvement</strong><span class="node-description">Prompts · tools · memory · code</span><span class="node-expansion">3 method families <span>−</span></span></a>
                 <a class="tree-node object-node joint-node" data-node="joint" id="branch-joint" data-action="select-branch" href="?view=tree&amp;branch=joint"><span class="node-kicker">02 <span class="node-number">1</span></span><strong>Model–harness optimization</strong><span class="node-description">Pipeline compilation and adaptation</span></a>
                 <a class="tree-node object-node foundation-node" data-node="foundation" id="branch-foundation" data-action="select-branch" href="?view=tree&amp;branch=foundation"><span class="node-kicker">03 <span class="node-number">1</span></span><strong>Related foundations</strong><span class="node-description">Feedback and output refinement</span></a>
@@ -69,6 +71,7 @@
               </div>
             </div>
             <div class="canvas-bottom"><div class="legend"><span class="legend-line"></span>Taxonomy link<span class="legend-square"></span>Selected branch</div><div class="zoom-controls"><button id="zoom-out" aria-label="Zoom out">−</button><output id="zoom-label">100%</output><button id="zoom-in" aria-label="Zoom in">+</button><span></span><button id="zoom-reset" aria-label="Reset canvas" data-icon="fit"></button></div></div>
+
             <div class="view-insight" id="view-insight"><span data-icon="compass"></span><div><strong>Explore a method family</strong><p>Select a branch to inspect its mechanisms, papers, and evidence.</p></div></div>
           </div>
           <div id="papers-view" class="view-panel" hidden><div class="index-heading"><div><h2>Paper index</h2><p>Find a mechanism, then follow the original evidence.</p></div><span id="result-count" class="small-badge"></span></div><div id="paper-list"></div></div>
@@ -76,7 +79,7 @@
         </section>
         <aside class="inspector" id="inspector" aria-busy="false" aria-label="Branch and paper details"></aside>
       </div>
-      <footer class="page-footer"><span>Yggra <span class="footer-dot">·</span> Mechanism taxonomy v0.3</span><nav aria-label="Data access"><a href="./catalog.html">Readable catalog</a><a href="./atlas.json" download="agent-atlas.json">JSON ↓</a><a href="./agent-guide.html">For agents ↗</a></nav></footer>
+      <footer class="page-footer"><span>Yggra <span class="footer-dot">·</span> Methods &amp; capabilities v0.4</span><nav aria-label="Data access"><a href="./catalog.html">Readable catalog</a><a href="./atlas.json" download="agent-atlas.json">JSON ↓</a><a href="./agent-guide.html">For agents ↗</a></nav></footer>
     </main>
   </div>
   <div id="live-status" class="sr-only" aria-live="polite"></div>

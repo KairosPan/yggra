@@ -8,13 +8,14 @@ Yggra organizes methods around three questions:
 2. Can lineage improve search?
 3. Do descendants become better improvers?
 
-The current seed collection contains eight papers. Version inheritance is explored within the harness improvement branch.
+The current collection contains 15 papers and six capability pathways inspired by [CIS 7000 — Multi-Modal AI](https://cis7000-fall26.thelabone.org/). Version inheritance remains within the harness improvement branch. Capability stages are editorial research targets, not historical lineage or proof of recursive self-improvement.
 
 ## Explore
 
 | Resource | Purpose |
 | --- | --- |
 | [`dist/index.html`](dist/index.html) | Animated world-tree landing page, with pause and reduced-motion support |
+| [`dist/pathways.html`](dist/pathways.html) | Six capability routes, suggested experiments, method connections, and course sources |
 | [`dist/atlas.html`](dist/atlas.html) | Interactive taxonomy, paper search, and evidence matrix |
 | [`dist/catalog.html`](dist/catalog.html) | Complete readable catalog; no JavaScript required |
 | [`dist/atlas.json`](dist/atlas.json) | Structured papers, taxonomy, evidence notes, and sources |
@@ -48,7 +49,7 @@ Edit [`data/atlas.json`](data/atlas.json), then regenerate the browser dataset, 
 node scripts/build-data.cjs
 ```
 
-Generated files are committed in `dist/`. Update their source dataset or generator rather than editing generated outputs directly. Landing-page content is authored separately in `dist/index.html`.
+Generated files are committed in `dist/`. Update their source dataset or generator rather than editing generated outputs directly. The landing-page pathway section and collection counts are generated from the dataset; the rest of the landing page is authored in `dist/index.html`.
 
 Run the URL-state and legacy-route tests with Node.js 18 or later:
 
@@ -74,3 +75,9 @@ Question filters include `tested` and `mechanism`. Excluded papers are not negat
 The [hosted demo](https://agent-evolution-atlas-pan.pan5998022.chatgpt.site) is private and requires authorized access, including its JSON and agent resources. Local use of this repository does not require access to the hosted demo.
 
 The existing Sites deployment configuration lives in [`.openai/hosting.json`](.openai/hosting.json). Any static web server can serve `dist/`.
+
+## Course-informed pathways
+
+The six routes cover grounded perception, multimodal reasoning, generative communication, temporal and causal world models, embodied action, and structured and scientific reasoning. Seven verified course readings extend the original eight-paper collection. Direct and bridge readings remain distinct, optional readings are labeled, and later syllabus readings remain TBD as of September 11, 2026.
+
+Dataset 0.4.0 uses schema 1.1.0. Each capability branch has a `pathway` object with stable stage IDs, course lecture references, proposed evaluations, improvement hypotheses, and links to existing method branches. `course_sources` and `cross_cutting_facets` preserve provenance and shared evaluation concerns. An empty reading branch intentionally has no selected paper. The generator also refreshes the landing-page pathway section and the no-JavaScript pathway page.

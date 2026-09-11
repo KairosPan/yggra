@@ -10,3 +10,15 @@ test('URL state survives a reload with punctuation and unicode in search',()=>{c
 test('lens filters are explicit and selecting a filtered-out paper resolves to a result',()=>{const s=model.normalize({view:'papers',question:'q3',paper:'self-refine',branch:'foundation'});assert.equal(s.paper,'dgm');const ids=model.filteredPapers(s).map(p=>p.id);assert.deepEqual(ids,['dgm','hyperagents']);});
 test('empty results stay empty instead of silently resetting filters',()=>{const s=model.normalize({view:'papers',query:'no-paper-matches-this'});assert.equal(model.filteredPapers(s).length,0);assert.equal(s.query,'no-paper-matches-this');});
 test('long input is bounded and no user text becomes taxonomy identifiers',()=>{const s=model.normalize({query:'a'.repeat(1000),branch:'<script>alert(1)</script>'});assert.equal(s.query.length,240);assert.equal(s.branch,'evolution');});
+test('a capability route without readings survives deep links and reloads without inventing a paper',()=>{
+ const s=model.fromParams(new URLSearchParams('view=tree&branch=generative-communication&paper=dgm'));
+ assert.equal(s.branch,'generative-communication');assert.equal(s.paper,null);
+ assert.ok(!model.toQuery(s).includes('paper='));
+ assert.deepEqual(model.fromParams(new URLSearchParams(model.toQuery(s))),s);
+});
+test('cross-classified course readings keep the requested route and are searchable by every route',()=>{
+ const s=model.fromParams(new URLSearchParams('view=tree&branch=world-models&paper=sayplan'));
+ assert.equal(s.branch,'world-models');assert.equal(s.paper,'sayplan');
+ const ids=model.filteredPapers(model.normalize({query:'Structured & scientific reasoning'})).map(p=>p.id);
+ assert.ok(ids.includes('winoground'));
+});
