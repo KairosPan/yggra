@@ -1,0 +1,361 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-evolution-atlas-pan.pan5998022.chatgpt.site/atlas.schema.json",
+  "title": "Agent Atlas dataset, schema 1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "dataset_version": {
+      "type": "string"
+    },
+    "language": {
+      "const": "en"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "coverage": {
+      "type": "string"
+    },
+    "annotation_kind": {
+      "type": "string"
+    },
+    "relationship_semantics": {
+      "type": "string"
+    },
+    "year_basis": {
+      "type": "string"
+    },
+    "question_filter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "included_statuses": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "tested",
+              "mechanism",
+              "unknown",
+              "outside"
+            ]
+          }
+        },
+        "meaning": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "included_statuses",
+        "meaning"
+      ]
+    },
+    "status_definitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tested": {
+          "type": "string"
+        },
+        "mechanism": {
+          "type": "string"
+        },
+        "unknown": {
+          "type": "string"
+        },
+        "outside": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "tested",
+        "mechanism",
+        "unknown",
+        "outside"
+      ]
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "enum": [
+              "q1",
+              "q2",
+              "q3"
+            ]
+          },
+          "short": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "criterion": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "short",
+          "title",
+          "description",
+          "criterion"
+        ]
+      }
+    },
+    "branches": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "parent_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "papers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "parent_id",
+          "title",
+          "code",
+          "summary",
+          "tags",
+          "papers"
+        ]
+      }
+    },
+    "papers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1900
+          },
+          "branch": {
+            "type": "string"
+          },
+          "branch_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "paper": {
+            "type": "string",
+            "format": "uri"
+          },
+          "source": {
+            "type": "string",
+            "format": "uri"
+          },
+          "mechanism": {
+            "type": "string"
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "q1": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "tested",
+                      "mechanism",
+                      "unknown",
+                      "outside"
+                    ]
+                  },
+                  "note": {
+                    "type": "string"
+                  },
+                  "source_url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "source_locator": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "status",
+                  "note",
+                  "source_url",
+                  "source_locator"
+                ]
+              },
+              "q2": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "tested",
+                      "mechanism",
+                      "unknown",
+                      "outside"
+                    ]
+                  },
+                  "note": {
+                    "type": "string"
+                  },
+                  "source_url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "source_locator": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "status",
+                  "note",
+                  "source_url",
+                  "source_locator"
+                ]
+              },
+              "q3": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "tested",
+                      "mechanism",
+                      "unknown",
+                      "outside"
+                    ]
+                  },
+                  "note": {
+                    "type": "string"
+                  },
+                  "source_url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "source_locator": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "status",
+                  "note",
+                  "source_url",
+                  "source_locator"
+                ]
+              }
+            },
+            "required": [
+              "q1",
+              "q2",
+              "q3"
+            ]
+          },
+          "limitation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "title",
+          "year",
+          "branch",
+          "branch_ids",
+          "paper",
+          "mechanism",
+          "targets",
+          "evidence"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "dataset_version",
+    "language",
+    "updated_at",
+    "title",
+    "description",
+    "coverage",
+    "annotation_kind",
+    "relationship_semantics",
+    "year_basis",
+    "question_filter",
+    "status_definitions",
+    "questions",
+    "branches",
+    "papers"
+  ]
+}

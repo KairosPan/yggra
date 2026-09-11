@@ -1,5 +1,4 @@
-/* Generated from data/atlas.json. Run node scripts/build-data.cjs. */
-window.ATLAS_DATA = {
+{
   "schema_version": "1.0.0",
   "dataset_version": "0.2.0",
   "language": "en",
@@ -464,4 +463,4 @@ window.ATLAS_DATA = {
       }
     }
   ]
-};
+}

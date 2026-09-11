@@ -1,75 +1,82 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#191d25">
-  <meta name="description" content="探索 agent 演化文献、harness 改进机制与三个研究问题的证据。">
-  <title>Agent Atlas — 演化文献图谱</title>
+  <meta name="description" content="Explore agent improvement mechanisms, literature classifications, and evidence for three research questions.">
+  <title>Agent Atlas — Evolution Literature Map</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="stylesheet" href="./styles.css">
+  <link rel="alternate" type="application/json" href="./atlas.json" title="Agent Atlas structured dataset">
+  <link rel="alternate" type="text/html" href="./catalog.html" title="Complete readable catalog">
+  <link rel="help" type="text/plain" href="./llms.txt" title="Agent access guide">
+  <link rel="describedby" type="application/schema+json" href="./atlas.schema.json">
   <script src="./data.js" defer></script>
+  <script src="./state.js" defer></script>
   <script src="./app.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#workspace">跳到图谱</a>
-  <aside class="sidebar" aria-label="主导航">
-    <a class="brand" href="./" aria-label="Agent Atlas 首页"><span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>Agent Atlas<small>EVOLUTION RESEARCH</small></span></a>
-    <div class="collection-label">研究空间 <span>01</span></div>
+  <a class="skip-link" href="#workspace">Skip to the workspace</a>
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" href="./" aria-label="Agent Atlas home"><span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>Agent Atlas<small>EVOLUTION RESEARCH</small></span></a>
+    <div class="collection-label">Research workspace <span>01</span></div>
     <nav id="main-nav">
-      <button class="nav-item active" data-view="tree"><span class="nav-icon" data-icon="tree"></span><span>文献分类树</span><span class="nav-end">↗</span></button>
-      <button class="nav-item" data-view="papers"><span class="nav-icon" data-icon="papers"></span><span>文献索引</span><span class="nav-count">8</span></button>
-      <button class="nav-item" data-view="questions"><span class="nav-icon" data-icon="question"></span><span>研究问题</span><span class="nav-count">3</span></button>
+      <a class="nav-item active" data-view="tree" id="view-tree" data-action="set-view" href="?view=tree"><span class="nav-icon" data-icon="tree"></span><span>Literature taxonomy</span><span class="nav-end">↗</span></a>
+      <a class="nav-item" data-view="papers" id="view-papers" data-action="set-view" href="?view=papers"><span class="nav-icon" data-icon="papers"></span><span>Paper index</span><span class="nav-count">8</span></a>
+      <a class="nav-item" data-view="questions" id="view-questions" data-action="set-view" href="?view=questions"><span class="nav-icon" data-icon="question"></span><span>Research questions</span><span class="nav-count">3</span></a>
     </nav>
     <div class="sidebar-divider"></div>
-    <div class="collection-label">分类范围</div>
-    <button class="scope-link" data-select="harness"><span class="scope-mark purple"></span>Harness 改进<span>6</span></button>
-    <button class="scope-link" data-select="joint"><span class="scope-mark blue"></span>模型与 Harness 协同<span>1</span></button>
-    <button class="scope-link" data-select="foundation"><span class="scope-mark gray"></span>相关基础方法<span>1</span></button>
-    <div class="sidebar-note"><span class="note-mark">↳</span><p>沿着方法的分支，<br>追问能力如何积累。</p></div>
-    <div class="sidebar-bottom"><span class="version-mark">α</span><div>种子文献集<small>第一版 · 2023—2026</small></div><span class="version-number">0.1</span></div>
+    <div class="collection-label">RESEARCH SCOPE</div>
+    <a class="scope-link" data-select="harness" id="scope-harness" data-action="select-branch" href="?view=tree&amp;branch=harness"><span class="scope-mark purple"></span>Harness improvement<span>6</span></a>
+    <a class="scope-link" data-select="joint" id="scope-joint" data-action="select-branch" href="?view=tree&amp;branch=joint"><span class="scope-mark blue"></span>Model–harness optimization<span>1</span></a>
+    <a class="scope-link" data-select="foundation" id="scope-foundation" data-action="select-branch" href="?view=tree&amp;branch=foundation"><span class="scope-mark gray"></span>Related foundations<span>1</span></a>
+    <div class="sidebar-data-links"><a href="./catalog.html">Readable catalog <span>↗</span></a><a href="./atlas.json" download="agent-atlas.json">Download JSON <span>↓</span></a><a href="./agent-guide.html">For agents <span>↗</span></a></div><div class="sidebar-note"><span class="note-mark">↳</span><p>Follow the methods.<br>Examine the evidence.</p></div>
+    <div class="sidebar-bottom"><span class="version-mark">α</span><div>Seed collection<small>2023–2026 · Curated seed set</small></div><span class="version-number">0.2</span></div>
   </aside>
 
   <div class="app-shell">
     <header class="topbar">
-      <div class="breadcrumb"><span>研究空间</span><span class="slash">/</span><strong id="breadcrumb-view">文献分类树</strong></div>
-      <label class="search-box"><span data-icon="search"></span><input id="search" type="search" placeholder="查找论文或改进机制…" aria-label="查找论文或改进机制"><kbd>/</kbd></label>
+      <div class="breadcrumb"><span>Research workspace</span><span class="slash">/</span><strong id="breadcrumb-view">Literature taxonomy</strong></div>
+      <label class="search-box"><span data-icon="search"></span><input id="search" type="search" placeholder="Find papers or mechanisms…" aria-label="Find papers or improvement mechanisms"><kbd>/</kbd></label>
       <span class="edition">RESEARCH EDITION</span>
     </header>
     <main id="workspace" tabindex="-1">
+      <noscript><p class="noscript-notice">JavaScript is disabled. <a href="./catalog.html">Read the complete catalog</a> or <a href="./atlas.json">download the JSON dataset</a>.</p></noscript>
       <section class="page-heading">
-        <div><div class="eyebrow">A MAP OF SELF-IMPROVING AGENTS</div><h1 id="page-title">Agent 演化图谱<span class="title-period">.</span></h1><p id="page-description">从改进机制出发，梳理能力继承、演化搜索与递归改进的证据。</p></div>
-        <div class="collection-stats"><div><strong>08</strong><span>种子文献</span></div><span class="stats-divider"></span><div><strong>03</strong><span>研究问题</span></div></div>
+        <div><div class="eyebrow">A MAP OF SELF-IMPROVING AGENTS</div><h1 id="page-title">Agent Evolution Atlas<span class="title-period">.</span></h1><p id="page-description">Explore how agents improve, what they inherit, and what the evidence supports.</p></div>
+        <div class="collection-stats"><div><strong>08</strong><span>seed papers</span></div><span class="stats-divider"></span><div><strong>03</strong><span>Research questions</span></div></div>
       </section>
-      <div class="question-bar"><span class="bar-label">研究视角</span><div class="question-controls" role="group" aria-label="研究视角"><button class="question-chip active" data-question="all" aria-pressed="true">全部机制</button><button class="question-chip" data-question="q1" aria-pressed="false"><span>Q1</span>能力继承</button><button class="question-chip" data-question="q2" aria-pressed="false"><span>Q2</span>谱系与搜索</button><button class="question-chip" data-question="q3" aria-pressed="false"><span>Q3</span>改进能力</button></div><span class="scope-caption">分类关系 ≠ 版本血缘</span></div>
+      <div class="question-bar"><span class="bar-label">Research lens</span><div class="question-controls" role="group" aria-label="Research lens"><button class="question-chip active" id="lens-all" data-action="set-question" aria-label="Show all mechanisms" data-question="all" aria-pressed="true">All mechanisms</button><button class="question-chip" id="lens-q1" data-action="set-question" aria-label="Filter by capability inheritance" data-question="q1" aria-pressed="false"><span>Q1</span>Inheritance</button><button class="question-chip" id="lens-q2" data-action="set-question" aria-label="Filter by lineage and search" data-question="q2" aria-pressed="false"><span>Q2</span>Lineage & search</button><button class="question-chip" id="lens-q3" data-action="set-question" aria-label="Filter by improvement ability" data-question="q3" aria-pressed="false"><span>Q3</span>Better improvers</button></div><span class="scope-caption">Taxonomy, not ancestry</span></div>
+      <p id="filter-description" class="filter-description" aria-live="polite">Showing all mechanisms. Evidence labels refer only to the stated experimental scope.</p>
       <div class="workbench">
-        <section class="main-surface" aria-label="文献探索区">
+        <section class="main-surface" aria-label="Literature explorer">
           <div id="tree-view" class="view-panel">
-            <div class="canvas-heading"><div><span class="surface-mark" data-icon="tree"></span><strong>方法分类</strong><span class="small-badge">初步框架</span></div><button class="text-button" id="toggle-branches" aria-expanded="true">收起 Harness <span>−</span></button></div>
-            <div class="canvas-viewport" id="canvas-viewport" tabindex="0" aria-label="分类树画布，可横向滚动">
+            <div class="canvas-heading"><div><span class="surface-mark" data-icon="tree"></span><strong>Method taxonomy</strong><span class="small-badge">Seed framework</span></div><button class="text-button" id="toggle-branches" data-action="toggle-branches" aria-controls="method-nodes" aria-expanded="true">Collapse harness <span>−</span></button></div>
+            <div class="canvas-viewport" id="canvas-viewport" tabindex="0" aria-label="Taxonomy diagram. Scroll horizontally to explore all branches.">
               <div class="tree-stage" id="tree-stage">
-                <svg class="tree-connections" viewBox="0 0 790 633" aria-hidden="true"><path data-connection="harness" d="M196 337 H214 Q232 337 232 319 V220 Q232 202 249 202 H262"/><path data-connection="joint" d="M196 337 H214 Q232 337 232 355 V404 Q232 422 250 422 H262"/><path data-connection="foundation" d="M196 337 H214 Q232 337 232 355 V542 Q232 560 250 560 H262"/><g id="harness-connections"><path data-connection="iterative" d="M444 202 H458 Q473 202 473 187 V143 Q473 126 490 126 H503"/><path data-connection="evolution" class="selected-path" d="M444 202 H458 Q473 202 473 217 V305 Q473 322 490 322 H503"/><path data-connection="memory" d="M444 202 H458 Q473 202 473 217 V495 Q473 512 490 512 H503"/></g></svg>
-                <div class="tree-axis axis-root">研究对象</div><div class="tree-axis axis-object">改进层面</div><div class="tree-axis axis-method" id="method-axis">方法分支</div>
-                <button class="tree-node root-node" data-node="all"><span class="node-kicker">ROOT / 00</span><strong>Agent 自我改进</strong><span class="node-description">方法与证据的研究地图</span><span class="root-foot">8 篇代表文献 <span>↗</span></span></button>
-                <button class="tree-node object-node harness-node" data-node="harness"><span class="node-kicker">01 <span class="node-number">6</span></span><strong>Harness 改进</strong><span class="node-description">提示 · 工具 · 记忆 · 代码</span><span class="node-expansion">3 个方法分支 <span>−</span></span></button>
-                <button class="tree-node object-node joint-node" data-node="joint"><span class="node-kicker">02 <span class="node-number">1</span></span><strong>模型与 Harness 协同</strong><span class="node-description">程序编译与模型适配</span></button>
-                <button class="tree-node object-node foundation-node" data-node="foundation"><span class="node-kicker">03 <span class="node-number">1</span></span><strong>相关基础方法</strong><span class="node-description">任务内反馈与输出修订</span></button>
+                <svg class="tree-connections" viewBox="0 0 790 710" aria-hidden="true"><path data-connection="harness" d="M196 337 H214 Q232 337 232 319 V220 Q232 202 249 202 H262"/><path data-connection="joint" d="M196 337 H214 Q232 337 232 355 V404 Q232 422 250 422 H262"/><path data-connection="foundation" d="M196 337 H214 Q232 337 232 355 V542 Q232 560 250 560 H262"/><g id="harness-connections"><path data-connection="iterative" d="M444 202 H458 Q473 202 473 187 V143 Q473 126 490 126 H503"/><path data-connection="evolution" class="selected-path" d="M444 202 H458 Q473 202 473 217 V305 Q473 322 490 322 H503"/><path data-connection="memory" d="M444 202 H458 Q473 202 473 217 V495 Q473 512 490 512 H503"/></g></svg>
+                <div class="tree-axis axis-root">RESEARCH OBJECT</div><div class="tree-axis axis-object">IMPROVEMENT LAYER</div><div class="tree-axis axis-method" id="method-axis">METHOD FAMILY</div>
+                <a class="tree-node root-node" data-node="all" id="branch-all" data-action="select-branch" href="?view=tree&amp;branch=all"><span class="node-kicker">ROOT / 00</span><strong>Agent improvement</strong><span class="node-description">Mechanisms and evidence</span><span class="root-foot">8 seed papers <span>↗</span></span></a>
+                <a class="tree-node object-node harness-node" data-node="harness" id="branch-harness" data-action="select-branch" href="?view=tree&amp;branch=harness"><span class="node-kicker">01 <span class="node-number">6</span></span><strong>Harness improvement</strong><span class="node-description">Prompts · tools · memory · code</span><span class="node-expansion">3 method families <span>−</span></span></a>
+                <a class="tree-node object-node joint-node" data-node="joint" id="branch-joint" data-action="select-branch" href="?view=tree&amp;branch=joint"><span class="node-kicker">02 <span class="node-number">1</span></span><strong>Model–harness optimization</strong><span class="node-description">Pipeline compilation and adaptation</span></a>
+                <a class="tree-node object-node foundation-node" data-node="foundation" id="branch-foundation" data-action="select-branch" href="?view=tree&amp;branch=foundation"><span class="node-kicker">03 <span class="node-number">1</span></span><strong>Related foundations</strong><span class="node-description">Feedback and output refinement</span></a>
                 <div id="method-nodes">
-                  <button class="tree-node method-node iterative-node" data-node="iterative"><span class="node-kicker">01.1 <span class="node-number">1</span></span><strong>单版本迭代优化</strong><span class="node-description">用评价反馈，更新当前配置</span><span class="node-paper-line">TextGrad <span>↗</span></span></button>
-                  <button class="tree-node method-node evolution-node selected" data-node="evolution"><span class="node-kicker">01.2 <span class="node-number">3</span></span><strong>档案搜索与分支演化</strong><span class="node-description">生成变体 · 保留档案 · 选择后代</span><span class="node-tag">含基于继承的版本演化</span><span class="node-paper-line">ADAS · DGM · Hyperagents <span>↗</span></span></button>
-                  <button class="tree-node method-node memory-node" data-node="memory"><span class="node-kicker">01.3 <span class="node-number">2</span></span><strong>跨任务经验积累</strong><span class="node-description">将经验保存为记忆与可复用技能</span><span class="node-paper-line">Reflexion · Voyager <span>↗</span></span></button>
+                  <a class="tree-node method-node iterative-node" data-node="iterative" id="branch-iterative" data-action="select-branch" href="?view=tree&amp;branch=iterative"><span class="node-kicker">01.1 <span class="node-number">1</span></span><strong>Iterative optimization</strong><span class="node-description">Use feedback to update a system</span><span class="node-paper-line">TextGrad <span>↗</span></span></a>
+                  <a class="tree-node method-node evolution-node selected" data-node="evolution" id="branch-evolution" data-action="select-branch" href="?view=tree&amp;branch=evolution"><span class="node-kicker">01.2 <span class="node-number">3</span></span><strong>Archive & branch evolution</strong><span class="node-description">Generate, evaluate, and retain agents</span><span class="node-tag">Includes version inheritance</span><span class="node-paper-line">ADAS · DGM · Hyperagents <span>↗</span></span></a>
+                  <a class="tree-node method-node memory-node" data-node="memory" id="branch-memory" data-action="select-branch" href="?view=tree&amp;branch=memory"><span class="node-kicker">01.3 <span class="node-number">2</span></span><strong>Experience accumulation</strong><span class="node-description">Retain reflections and reusable skills</span><span class="node-paper-line">Reflexion · Voyager <span>↗</span></span></a>
                 </div>
               </div>
             </div>
-            <div class="canvas-bottom"><div class="legend"><span class="legend-line"></span>方法分类连接<span class="legend-square"></span>当前分支</div><div class="zoom-controls"><button id="zoom-out" aria-label="缩小分类树">−</button><output id="zoom-label">100%</output><button id="zoom-in" aria-label="放大分类树">+</button><span></span><button id="zoom-reset" aria-label="重置画布" data-icon="fit"></button></div></div>
-            <div class="view-insight" id="view-insight"><span data-icon="compass"></span><div><strong>从分支进入文献</strong><p>选择一个改进方法，查看它保留了什么，以及有哪些可核查的研究证据。</p></div></div>
+            <div class="canvas-bottom"><div class="legend"><span class="legend-line"></span>Taxonomy link<span class="legend-square"></span>Selected branch</div><div class="zoom-controls"><button id="zoom-out" aria-label="Zoom out">−</button><output id="zoom-label">100%</output><button id="zoom-in" aria-label="Zoom in">+</button><span></span><button id="zoom-reset" aria-label="Reset canvas" data-icon="fit"></button></div></div>
+            <div class="view-insight" id="view-insight"><span data-icon="compass"></span><div><strong>Explore a method family</strong><p>Select a branch to inspect its mechanisms, papers, and evidence.</p></div></div>
           </div>
-          <div id="papers-view" class="view-panel" hidden><div class="index-heading"><div><h2>文献索引</h2><p>按机制定位论文，回到原始来源核查证据。</p></div><span id="result-count" class="small-badge"></span></div><div id="paper-list"></div></div>
-          <div id="questions-view" class="view-panel" hidden><div class="index-heading"><div><h2>三个问题，三种证据</h2><p>将机制存在与效果验证分开阅读。</p></div><span class="small-badge">证据地图</span></div><div id="research-questions"></div><div class="matrix-wrapper"><table class="evidence-matrix"><caption>代表性文献的初步证据标注</caption><thead><tr><th scope="col">文献</th><th scope="col">Q1 继承</th><th scope="col">Q2 搜索</th><th scope="col">Q3 改进</th></tr></thead><tbody id="evidence-rows"></tbody></table></div><p class="matrix-footnote">“待核查”表示本图谱尚未完成对应证据核验，不代表论文没有证据。</p></div>
+          <div id="papers-view" class="view-panel" hidden><div class="index-heading"><div><h2>Paper index</h2><p>Find a mechanism, then follow the original evidence.</p></div><span id="result-count" class="small-badge"></span></div><div id="paper-list"></div></div>
+          <div id="questions-view" class="view-panel" hidden><div class="index-heading"><div><h2>Three questions. Scoped evidence.</h2><p>Distinguish a mechanism from evidence that it works.</p></div><span class="small-badge">Evidence map</span></div><div id="research-questions"></div><div class="matrix-wrapper"><table class="evidence-matrix"><caption>Preliminary evidence annotations for the seed papers</caption><thead><tr><th scope="col">Paper</th><th scope="col">Q1 Inheritance</th><th scope="col">Q2 Search</th><th scope="col">Q3 Improvers</th></tr></thead><tbody id="evidence-rows"></tbody></table></div><p class="matrix-footnote">“Unverified” means this atlas has not checked the relevant evidence; it does not mean the paper has none.</p></div>
         </section>
-        <aside class="inspector" id="inspector" aria-label="分支与文献详情"></aside>
+        <aside class="inspector" id="inspector" aria-busy="false" aria-label="Branch and paper details"></aside>
       </div>
-      <footer class="page-footer"><span>Agent Atlas <span class="footer-dot">·</span> 文献机制分类 v0.1</span><span>种子集用于探索框架，非完整领域综述</span></footer>
+      <footer class="page-footer"><span>Agent Atlas <span class="footer-dot">·</span> Mechanism taxonomy v0.2</span><nav aria-label="Data access"><a href="./catalog.html">Readable catalog</a><a href="./atlas.json" download="agent-atlas.json">JSON ↓</a><a href="./agent-guide.html">For agents ↗</a></nav></footer>
     </main>
   </div>
   <div id="live-status" class="sr-only" aria-live="polite"></div>
