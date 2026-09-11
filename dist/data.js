@@ -1,10 +1,10 @@
 /* Generated from data/atlas.json. Run node scripts/build-data.cjs. */
 window.ATLAS_DATA = {
   "schema_version": "1.0.0",
-  "dataset_version": "0.2.0",
+  "dataset_version": "0.3.0",
   "language": "en",
   "updated_at": "2026-09-11",
-  "title": "Agent Atlas",
+  "title": "Yggra",
   "description": "A seed literature taxonomy of agent improvement mechanisms and research evidence.",
   "coverage": "Eight representative papers, not a comprehensive review.",
   "annotation_kind": "Editorial summaries of cited papers; not independent replications.",

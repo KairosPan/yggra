@@ -1,6 +1,6 @@
-# Agent Atlas
+# Yggra
 
-> A private, read-only seed taxonomy of agent improvement methods. English dataset version 0.2.0.
+> A private, read-only seed taxonomy of agent improvement methods. English dataset version 0.3.0.
 
 ## Resources
 - [Structured dataset](./atlas.json): eight papers, stable IDs, taxonomy, three questions, scoped evidence, and sources.
@@ -15,4 +15,4 @@ The Site is private. These resources require the same authorized session as the 
 Taxonomy parent_id and paper branch_ids describe classification, not actual ancestry. Evidence statuses must be read with their notes and source_url. Tested means the specific reported experiment, not a universal proof. Mechanism is not causal validation. Unknown means unverified in this atlas. Outside means outside the core method scope.
 
 ## Navigation
-Use /?view=tree&branch=evolution&paper=dgm&question=q2 or /?view=papers&q=memory. The browser supports Back/Forward. Question lenses include tested and mechanism only; excluded papers are not negative findings.
+Use /atlas.html?view=tree&branch=evolution&paper=dgm&question=q2 or /atlas.html?view=papers&q=memory. The browser supports Back/Forward. Question lenses include tested and mechanism only; excluded papers are not negative findings.

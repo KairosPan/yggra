@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agent-evolution-atlas-pan.pan5998022.chatgpt.site/atlas.schema.json",
-  "title": "Agent Atlas dataset, schema 1.0.0",
+  "title": "Yggra dataset, schema 1.0.0",
   "type": "object",
   "additionalProperties": false,
   "properties": {

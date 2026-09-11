@@ -2,83 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#191d25">
-  <meta name="description" content="Explore agent improvement mechanisms, literature classifications, and evidence for three research questions.">
-  <title>Agent Atlas — Evolution Literature Map</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#060e0c">
+  <meta name="description" content="Yggra is a research atlas of self-improving agents. Explore methods, capability inheritance, and the evidence behind recursive improvement.">
+  <title>Yggra — The Agent Evolution Atlas</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <link rel="stylesheet" href="./styles.css">
-  <link rel="alternate" type="application/json" href="./atlas.json" title="Agent Atlas structured dataset">
+  <link rel="stylesheet" href="./landing.css">
+  <link rel="preload" as="image" href="./assets/yggra-world-tree.png" fetchpriority="high">
+  <link rel="alternate" type="application/json" href="./atlas.json" title="Yggra structured dataset">
   <link rel="alternate" type="text/html" href="./catalog.html" title="Complete readable catalog">
-  <link rel="help" type="text/plain" href="./llms.txt" title="Agent access guide">
+  <link rel="help" type="text/plain" href="./llms.txt" title="Agent guide">
   <link rel="describedby" type="application/schema+json" href="./atlas.schema.json">
-  <script src="./data.js" defer></script>
-  <script src="./state.js" defer></script>
-  <script src="./app.js" defer></script>
+  <script src="./landing-route.js"></script>
+  <script src="./landing.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#workspace">Skip to the workspace</a>
-  <aside class="sidebar" aria-label="Main navigation">
-    <a class="brand" href="./" aria-label="Agent Atlas home"><span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>Agent Atlas<small>EVOLUTION RESEARCH</small></span></a>
-    <div class="collection-label">Research workspace <span>01</span></div>
-    <nav id="main-nav">
-      <a class="nav-item active" data-view="tree" id="view-tree" data-action="set-view" href="?view=tree"><span class="nav-icon" data-icon="tree"></span><span>Literature taxonomy</span><span class="nav-end">↗</span></a>
-      <a class="nav-item" data-view="papers" id="view-papers" data-action="set-view" href="?view=papers"><span class="nav-icon" data-icon="papers"></span><span>Paper index</span><span class="nav-count">8</span></a>
-      <a class="nav-item" data-view="questions" id="view-questions" data-action="set-view" href="?view=questions"><span class="nav-icon" data-icon="question"></span><span>Research questions</span><span class="nav-count">3</span></a>
-    </nav>
-    <div class="sidebar-divider"></div>
-    <div class="collection-label">RESEARCH SCOPE</div>
-    <a class="scope-link" data-select="harness" id="scope-harness" data-action="select-branch" href="?view=tree&amp;branch=harness"><span class="scope-mark purple"></span>Harness improvement<span>6</span></a>
-    <a class="scope-link" data-select="joint" id="scope-joint" data-action="select-branch" href="?view=tree&amp;branch=joint"><span class="scope-mark blue"></span>Model–harness optimization<span>1</span></a>
-    <a class="scope-link" data-select="foundation" id="scope-foundation" data-action="select-branch" href="?view=tree&amp;branch=foundation"><span class="scope-mark gray"></span>Related foundations<span>1</span></a>
-    <div class="sidebar-data-links"><a href="./catalog.html">Readable catalog <span>↗</span></a><a href="./atlas.json" download="agent-atlas.json">Download JSON <span>↓</span></a><a href="./agent-guide.html">For agents <span>↗</span></a></div><div class="sidebar-note"><span class="note-mark">↳</span><p>Follow the methods.<br>Examine the evidence.</p></div>
-    <div class="sidebar-bottom"><span class="version-mark">α</span><div>Seed collection<small>2023–2026 · Curated seed set</small></div><span class="version-number">0.2</span></div>
-  </aside>
-
-  <div class="app-shell">
-    <header class="topbar">
-      <div class="breadcrumb"><span>Research workspace</span><span class="slash">/</span><strong id="breadcrumb-view">Literature taxonomy</strong></div>
-      <label class="search-box"><span data-icon="search"></span><input id="search" type="search" placeholder="Find papers or mechanisms…" aria-label="Find papers or improvement mechanisms"><kbd>/</kbd></label>
-      <span class="edition">RESEARCH EDITION</span>
-    </header>
-    <main id="workspace" tabindex="-1">
-      <noscript><p class="noscript-notice">JavaScript is disabled. <a href="./catalog.html">Read the complete catalog</a> or <a href="./atlas.json">download the JSON dataset</a>.</p></noscript>
-      <section class="page-heading">
-        <div><div class="eyebrow">A MAP OF SELF-IMPROVING AGENTS</div><h1 id="page-title">Agent Evolution Atlas<span class="title-period">.</span></h1><p id="page-description">Explore how agents improve, what they inherit, and what the evidence supports.</p></div>
-        <div class="collection-stats"><div><strong>08</strong><span>seed papers</span></div><span class="stats-divider"></span><div><strong>03</strong><span>Research questions</span></div></div>
-      </section>
-      <div class="question-bar"><span class="bar-label">Research lens</span><div class="question-controls" role="group" aria-label="Research lens"><button class="question-chip active" id="lens-all" data-action="set-question" aria-label="Show all mechanisms" data-question="all" aria-pressed="true">All mechanisms</button><button class="question-chip" id="lens-q1" data-action="set-question" aria-label="Filter by capability inheritance" data-question="q1" aria-pressed="false"><span>Q1</span>Inheritance</button><button class="question-chip" id="lens-q2" data-action="set-question" aria-label="Filter by lineage and search" data-question="q2" aria-pressed="false"><span>Q2</span>Lineage & search</button><button class="question-chip" id="lens-q3" data-action="set-question" aria-label="Filter by improvement ability" data-question="q3" aria-pressed="false"><span>Q3</span>Better improvers</button></div><span class="scope-caption">Taxonomy, not ancestry</span></div>
-      <p id="filter-description" class="filter-description" aria-live="polite">Showing all mechanisms. Evidence labels refer only to the stated experimental scope.</p>
-      <div class="workbench">
-        <section class="main-surface" aria-label="Literature explorer">
-          <div id="tree-view" class="view-panel">
-            <div class="canvas-heading"><div><span class="surface-mark" data-icon="tree"></span><strong>Method taxonomy</strong><span class="small-badge">Seed framework</span></div><button class="text-button" id="toggle-branches" data-action="toggle-branches" aria-controls="method-nodes" aria-expanded="true">Collapse harness <span>−</span></button></div>
-            <div class="canvas-viewport" id="canvas-viewport" tabindex="0" aria-label="Taxonomy diagram. Scroll horizontally to explore all branches.">
-              <div class="tree-stage" id="tree-stage">
-                <svg class="tree-connections" viewBox="0 0 790 710" aria-hidden="true"><path data-connection="harness" d="M196 337 H214 Q232 337 232 319 V220 Q232 202 249 202 H262"/><path data-connection="joint" d="M196 337 H214 Q232 337 232 355 V404 Q232 422 250 422 H262"/><path data-connection="foundation" d="M196 337 H214 Q232 337 232 355 V542 Q232 560 250 560 H262"/><g id="harness-connections"><path data-connection="iterative" d="M444 202 H458 Q473 202 473 187 V143 Q473 126 490 126 H503"/><path data-connection="evolution" class="selected-path" d="M444 202 H458 Q473 202 473 217 V305 Q473 322 490 322 H503"/><path data-connection="memory" d="M444 202 H458 Q473 202 473 217 V495 Q473 512 490 512 H503"/></g></svg>
-                <div class="tree-axis axis-root">RESEARCH OBJECT</div><div class="tree-axis axis-object">IMPROVEMENT LAYER</div><div class="tree-axis axis-method" id="method-axis">METHOD FAMILY</div>
-                <a class="tree-node root-node" data-node="all" id="branch-all" data-action="select-branch" href="?view=tree&amp;branch=all"><span class="node-kicker">ROOT / 00</span><strong>Agent improvement</strong><span class="node-description">Mechanisms and evidence</span><span class="root-foot">8 seed papers <span>↗</span></span></a>
-                <a class="tree-node object-node harness-node" data-node="harness" id="branch-harness" data-action="select-branch" href="?view=tree&amp;branch=harness"><span class="node-kicker">01 <span class="node-number">6</span></span><strong>Harness improvement</strong><span class="node-description">Prompts · tools · memory · code</span><span class="node-expansion">3 method families <span>−</span></span></a>
-                <a class="tree-node object-node joint-node" data-node="joint" id="branch-joint" data-action="select-branch" href="?view=tree&amp;branch=joint"><span class="node-kicker">02 <span class="node-number">1</span></span><strong>Model–harness optimization</strong><span class="node-description">Pipeline compilation and adaptation</span></a>
-                <a class="tree-node object-node foundation-node" data-node="foundation" id="branch-foundation" data-action="select-branch" href="?view=tree&amp;branch=foundation"><span class="node-kicker">03 <span class="node-number">1</span></span><strong>Related foundations</strong><span class="node-description">Feedback and output refinement</span></a>
-                <div id="method-nodes">
-                  <a class="tree-node method-node iterative-node" data-node="iterative" id="branch-iterative" data-action="select-branch" href="?view=tree&amp;branch=iterative"><span class="node-kicker">01.1 <span class="node-number">1</span></span><strong>Iterative optimization</strong><span class="node-description">Use feedback to update a system</span><span class="node-paper-line">TextGrad <span>↗</span></span></a>
-                  <a class="tree-node method-node evolution-node selected" data-node="evolution" id="branch-evolution" data-action="select-branch" href="?view=tree&amp;branch=evolution"><span class="node-kicker">01.2 <span class="node-number">3</span></span><strong>Archive & branch evolution</strong><span class="node-description">Generate, evaluate, and retain agents</span><span class="node-tag">Includes version inheritance</span><span class="node-paper-line">ADAS · DGM · Hyperagents <span>↗</span></span></a>
-                  <a class="tree-node method-node memory-node" data-node="memory" id="branch-memory" data-action="select-branch" href="?view=tree&amp;branch=memory"><span class="node-kicker">01.3 <span class="node-number">2</span></span><strong>Experience accumulation</strong><span class="node-description">Retain reflections and reusable skills</span><span class="node-paper-line">Reflexion · Voyager <span>↗</span></span></a>
-                </div>
-              </div>
-            </div>
-            <div class="canvas-bottom"><div class="legend"><span class="legend-line"></span>Taxonomy link<span class="legend-square"></span>Selected branch</div><div class="zoom-controls"><button id="zoom-out" aria-label="Zoom out">−</button><output id="zoom-label">100%</output><button id="zoom-in" aria-label="Zoom in">+</button><span></span><button id="zoom-reset" aria-label="Reset canvas" data-icon="fit"></button></div></div>
-            <div class="view-insight" id="view-insight"><span data-icon="compass"></span><div><strong>Explore a method family</strong><p>Select a branch to inspect its mechanisms, papers, and evidence.</p></div></div>
-          </div>
-          <div id="papers-view" class="view-panel" hidden><div class="index-heading"><div><h2>Paper index</h2><p>Find a mechanism, then follow the original evidence.</p></div><span id="result-count" class="small-badge"></span></div><div id="paper-list"></div></div>
-          <div id="questions-view" class="view-panel" hidden><div class="index-heading"><div><h2>Three questions. Scoped evidence.</h2><p>Distinguish a mechanism from evidence that it works.</p></div><span class="small-badge">Evidence map</span></div><div id="research-questions"></div><div class="matrix-wrapper"><table class="evidence-matrix"><caption>Preliminary evidence annotations for the seed papers</caption><thead><tr><th scope="col">Paper</th><th scope="col">Q1 Inheritance</th><th scope="col">Q2 Search</th><th scope="col">Q3 Improvers</th></tr></thead><tbody id="evidence-rows"></tbody></table></div><p class="matrix-footnote">“Unverified” means this atlas has not checked the relevant evidence; it does not mean the paper has none.</p></div>
-        </section>
-        <aside class="inspector" id="inspector" aria-busy="false" aria-label="Branch and paper details"></aside>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="./" aria-label="Yggra home"><svg viewBox="0 0 30 34" aria-hidden="true"><path d="M15 31V17M15 21 4 10M15 16 25 5M15 13V3"/><circle cx="4" cy="10" r="2"/><circle cx="25" cy="5" r="2"/><circle cx="15" cy="3" r="2"/></svg><span>yggra</span></a>
+    <nav aria-label="Main navigation"><a href="./atlas.html" data-action="open-atlas">The atlas</a><a href="#questions">The questions</a><a href="#for-agents">For agents</a></nav>
+    <a class="header-cta" href="./atlas.html" data-action="open-atlas">Explore the atlas <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main">
+    <section class="hero" id="the-tree" aria-labelledby="hero-title">
+      <div class="hero-scene" id="hero-scene" aria-hidden="true">
+        <div class="art-drift" id="art-drift"><img class="tree-image" src="./assets/yggra-world-tree.png" width="1586" height="992" alt="" fetchpriority="high"><img class="tree-bloom" src="./assets/yggra-world-tree.png" width="1586" height="992" alt=""><canvas id="life-stream"></canvas></div>
+        <div class="scene-shade"></div><div class="scene-floor"></div>
       </div>
-      <footer class="page-footer"><span>Agent Atlas <span class="footer-dot">·</span> Mechanism taxonomy v0.2</span><nav aria-label="Data access"><a href="./catalog.html">Readable catalog</a><a href="./atlas.json" download="agent-atlas.json">JSON ↓</a><a href="./agent-guide.html">For agents ↗</a></nav></footer>
-    </main>
-  </div>
-  <div id="live-status" class="sr-only" aria-live="polite"></div>
+      <div class="hero-copy">
+        <p class="eyebrow hero-enter"><span class="tiny-branch" aria-hidden="true">↳</span> THE AGENT EVOLUTION ATLAS</p>
+        <h1 id="hero-title"><span class="title-line"><span>Intelligence</span></span><span class="title-line"><span>is <em>branching.</em></span></span></h1>
+        <p class="hero-description hero-enter">An atlas of how agents improve.<br>Follow the methods. Examine the evidence.<br>Find your next branch.</p>
+        <div class="hero-actions hero-enter"><a class="button-primary" id="explore-atlas" href="./atlas.html" data-action="open-atlas">Explore the atlas <span aria-hidden="true">↗</span></a><a class="button-text" href="#questions">Start with a question <span aria-hidden="true">↓</span></a></div>
+        <div class="hero-footnote hero-enter"><span class="edition-mark">α</span><span>8 seed papers <i>·</i> 3 open questions</span></div>
+      </div>
+      <nav class="branch-labels" aria-label="Explore a research branch">
+        <a class="branch-label label-memory" href="./atlas.html?view=tree&amp;branch=memory" data-stream="memory"><span class="branch-pin" aria-hidden="true"></span><span><small>01 / RETAIN</small>Memory & skills</span><span class="branch-arrow" aria-hidden="true">↗</span></a>
+        <a class="branch-label label-evolution" href="./atlas.html?view=tree&amp;branch=evolution" data-stream="evolution"><span class="branch-pin" aria-hidden="true"></span><span><small>02 / EXPLORE</small>Evolving agents</span><span class="branch-arrow" aria-hidden="true">↗</span></a>
+        <a class="branch-label label-improver" href="./atlas.html?view=questions&amp;paper=hyperagents&amp;question=q3" data-stream="improver"><span class="branch-pin" aria-hidden="true"></span><span><small>03 / IMPROVE</small>Better improvers</span><span class="branch-arrow" aria-hidden="true">↗</span></a>
+      </nav>
+      <div class="hero-bottom"><a class="scroll-cue" href="#roots"><span class="scroll-track" aria-hidden="true"><i></i></span>FOLLOW THE ROOTS</a><div class="scene-controls"><span class="visual-note">A growing field, visualized.</span><button id="motion-toggle" type="button" hidden data-action="toggle-motion" aria-pressed="false" aria-label="Pause the tree animation"><span class="motion-glyph" aria-hidden="true">Ⅱ</span><span class="motion-label">Pause motion</span></button></div></div>
+    </section>
+
+    <section class="research-roots section-shell" id="roots" aria-labelledby="roots-title">
+      <div class="roots-intro"><h2 class="eyebrow" id="roots-title">ROOTED IN THE RESEARCH</h2><p>A starting collection.<br>A field still taking shape.</p></div>
+      <nav class="paper-names" aria-label="Selected research papers"><a href="./atlas.html?view=papers&amp;paper=reflexion">Reflexion<span>2023</span></a><a href="./atlas.html?view=papers&amp;paper=voyager">Voyager<span>2023</span></a><a href="./atlas.html?view=papers&amp;paper=textgrad">TextGrad<span>2024</span></a><a href="./atlas.html?view=papers&amp;paper=adas">ADAS<span>2024</span></a><a href="./atlas.html?view=papers&amp;paper=dgm">DGM<span>2025</span></a><a href="./atlas.html?view=papers&amp;paper=hyperagents">Hyperagents<span>2026</span></a></nav>
+    </section>
+
+    <section class="questions-section section-shell" id="questions" aria-labelledby="questions-title">
+      <div class="section-heading reveal"><div><p class="eyebrow">A LENS FOR THE FIELD</p><h2 id="questions-title">Three questions.<br><em>Endless branches.</em></h2></div><p class="section-description">Read each method through the same questions.<br>See what changes, what carries forward,<br>and what the experiments actually support.</p></div>
+      <div class="question-rows">
+        <a class="question-row reveal" href="./atlas.html?view=questions&amp;question=q1&amp;paper=voyager" data-question="q1"><span class="question-number">01</span><div class="question-heading"><span class="question-type">INHERITANCE</span><h3>What carries forward?</h3></div><p>Can a useful capability survive across versions, tasks, or models? Trace the memory, skills, and code that make reuse possible.</p><span class="question-link" aria-hidden="true">↗</span></a>
+        <a class="question-row reveal" href="./atlas.html?view=questions&amp;question=q2&amp;paper=dgm" data-question="q2"><span class="question-number">02</span><div class="question-heading"><span class="question-type">EVOLUTIONARY SEARCH</span><h3>Which branches matter?</h3></div><p>Can the history of a search make its next step better? Explore how archives, ancestors, and failed attempts guide improvement.</p><span class="question-link" aria-hidden="true">↗</span></a>
+        <a class="question-row reveal" href="./atlas.html?view=questions&amp;question=q3&amp;paper=hyperagents" data-question="q3"><span class="question-number">03</span><div class="question-heading"><span class="question-type">RECURSIVE IMPROVEMENT</span><h3>Can improvement improve?</h3></div><p>Do descendants become better at producing useful changes? Separate an editable improver from evidence of greater improvement ability.</p><span class="question-link" aria-hidden="true">↗</span></a>
+      </div>
+      <div class="evidence-note reveal"><span aria-hidden="true">↳</span><p>Every annotation has a scope. Every claim leads back to a source.</p><a href="./catalog.html">Read the evidence <span aria-hidden="true">↗</span></a></div>
+    </section>
+
+    <section class="agents-section section-shell" id="for-agents" aria-labelledby="agents-title">
+      <div class="agents-panel reveal">
+        <div class="agents-copy"><p class="eyebrow">HUMAN CURIOSITY. MACHINE READABILITY.</p><h2 id="agents-title">A shared map for<br>minds <em>and agents.</em></h2><p>Explore the atlas visually, or read the same research as structured data. Stable identifiers, explicit evidence labels, and original sources travel together.</p><div class="agents-actions"><a class="button-primary secondary" href="./agent-guide.html">Read the agent guide <span aria-hidden="true">↗</span></a><a class="button-text" href="./atlas.json" download="yggra-atlas.json">Download JSON <span aria-hidden="true">↓</span></a></div><p class="access-note">Private access applies to both the atlas and its data.</p></div>
+        <div class="data-record"><div class="record-header"><span class="file-icon" aria-hidden="true">{ }</span><span>atlas.json</span><span class="record-badge">RECORD EXCERPT</span></div><pre aria-label="Excerpt of the DGM research record"><code><span class="code-dim">{</span>
+  <span class="code-key">"id"</span>: <span class="code-value">"dgm"</span>,
+  <span class="code-key">"branch"</span>: <span class="code-value">"evolution"</span>,
+  <span class="code-key">"evidence"</span>: <span class="code-dim">{</span>
+    <span class="code-key">"q2"</span>: <span class="code-dim">{</span>
+      <span class="code-key">"status"</span>: <span class="code-value">"tested"</span>,
+      <span class="code-key">"source_url"</span>: <span class="code-value">"https://arxiv.org/html/2505.22954v3"</span>
+    <span class="code-dim">}</span>
+  <span class="code-dim">}</span>
+<span class="code-dim">}</span></code></pre><div class="record-footer"><span class="record-check" aria-hidden="true">↳</span>Read the full record for its experimental scope.<a href="./atlas.json" aria-label="Read the complete structured dataset">↗</a></div></div>
+      </div>
+    </section>
+
+    <section class="closing section-shell reveal" aria-labelledby="closing-title"><p class="eyebrow">THE NEXT BRANCH STARTS WITH A QUESTION</p><h2 id="closing-title">Find yours.</h2><a class="button-primary" href="./atlas.html" data-action="open-atlas">Enter the atlas <span aria-hidden="true">↗</span></a></section>
+  </main>
+  <footer class="site-footer section-shell"><a class="wordmark" href="./" aria-label="Yggra home"><span>yggra</span></a><p>A map of methods. A trail of evidence.</p><nav aria-label="Footer navigation"><a href="./catalog.html">Catalog</a><a href="./agent-guide.html">For agents</a><a href="./llms.txt">llms.txt</a><span>SEED EDITION · 0.3</span></nav></footer>
+  <div class="sr-only" id="motion-status" aria-live="polite"></div>
 </body>
 </html>

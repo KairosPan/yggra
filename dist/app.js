@@ -43,7 +43,7 @@
     $$('[data-question]').forEach(el=>{const active=el.dataset.question===state.question;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
     $('#breadcrumb-view').textContent={tree:'Literature taxonomy',papers:'Paper index',questions:'Research questions'}[state.view];$('#search').value=state.query;
     $('#filter-description').textContent=state.question==='all'?'Showing all mechanisms. Evidence labels refer only to the stated experimental scope.':`${state.question.toUpperCase()} lens: shows or highlights Tested and Mechanism annotations. Unverified or out-of-scope work is excluded from the index; exclusion is not negative evidence.`;
-    document.title=`${getPaper(state.paper).name} · ${branches[state.branch].title} — Agent Atlas`;document.body.dataset.view=state.view;document.body.dataset.question=state.question;
+    document.title=`${getPaper(state.paper).name} · ${branches[state.branch].title} — Yggra`;document.body.dataset.view=state.view;document.body.dataset.question=state.question;
     renderTree();renderInspector();if(state.view==='papers')renderPapers();if(state.view==='questions')renderQuestions();
     if(focusId){const next=document.getElementById(focusId);if(next&&next!==document.activeElement&&!next.closest('[hidden]'))next.focus({preventScroll:true});}
     requestAnimationFrame(drawConnections);
